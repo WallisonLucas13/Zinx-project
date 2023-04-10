@@ -12,9 +12,14 @@ const schema = Yup.object().shape({
 
 export default function novoProjeto(){
 
-    const { register, handleSubmit, formState } = UseForm({
+    const { register, handleSubmit, formState, reset } = UseForm({
         mode: 'all',
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema),
+        defaultValues: {
+            nome: '',
+            categoria: '',
+            tetoDeGastos: 0
+        }
     });
 
     const { errors, isSubmitting } = formState;
