@@ -6,7 +6,7 @@ import { useQuery } from "react-query"
 import styles from './Projetos.module.css'
 
 const getProjetos = async () => {
-    return (await axios.get<Projeto[]>("zinx-project-server-production.up.railway.app/projeto/todos")).data;
+    return (await axios.get<Projeto[]>("https://zinx-project-server-production.up.railway.app/projeto/todos")).data;
 }
 
 
