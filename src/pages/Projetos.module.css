@@ -1,0 +1,18 @@
+.content{
+    text-align: center;
+    margin:0 -5px;
+    box-sizing: border-box;
+    justify-content: center;
+}
+.content:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.title{
+    padding: 1.5em;
+    font-size: 17pt;
+    font-weight: bold;
+    font-family:Arial, Helvetica, sans-serif;
+}

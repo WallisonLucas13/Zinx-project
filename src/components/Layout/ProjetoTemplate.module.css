@@ -1,0 +1,45 @@
+
+.column{
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+    margin-bottom: 50px;
+}
+.card:hover{
+    background-color: lightblue;
+    cursor: pointer;
+    transform: scale(1.01);
+}
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 25px;
+    text-align: center;
+    background-color: #f1f1f1;
+    transition: 0.2s;
+}
+
+.card h1{
+    font-weight: bold;
+    font-size: 15pt;
+}
+.card h2{
+    color: #7b7b7b;
+
+}
+.card h2 span{
+    font-weight: bold;
+}
+.card h3{
+    color:#7b7b7b;
+}
+.card h3 span{
+    color:  #38c292;
+}
+
+@media screen and (max-width: 785px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
