@@ -20,4 +20,5 @@ body {
   background-color: #f4f4f4;
   font-family:monospace; 
   font-size: 13pt;
+  overflow-x: hidden;
 }

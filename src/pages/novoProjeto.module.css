@@ -1,0 +1,51 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+    gap: 20px;
+}
+
+.form input{
+    border: none;
+    padding: 10px;
+    display: block;
+    width: 100%;
+}
+
+.form h1{
+   font-weight: bold;
+   font-size: 15pt;
+}
+
+.form select{
+    border: none;
+    padding: 10px;
+    display: block;
+    width: 100%;
+}
+
+.btn{
+    background-color: #17c4b5;
+    padding: 1em;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+.btn:hover{
+    transform: scale(1.05);
+    border: 1px black solid;
+    background-color: lightblue;
+}
+.errorNome{
+    color: red;
+}
+.errorCategoria{
+    color: red;
+}
+.errorGastos{
+    color: red;
+}
