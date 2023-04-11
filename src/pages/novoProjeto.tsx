@@ -3,8 +3,11 @@ import styles from './novoProjeto.module.css'
 import { useForm as UseForm } from 'react-hook-form'
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import ProjetosService from '@/services/ProjetosService';
+import { useRouter } from 'next/router';
+import { GiConfirmed } from 'react-icons/gi';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
 const schema = Yup.object().shape({
     nome: Yup.string().required("Campo Obrigatório"),
@@ -34,10 +37,22 @@ export default function novoProjeto(){
         }
     });
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const router = useRouter();
+
     const { errors, isSubmitting } = formState;
 
-    const handleSubmitData = (dataForm: any) => {
-        
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const mutation = useMutation(data => {
+        return projetosService.postProjeto(data);
+    })
+
+    const handleSubmitData = (data: any) => {
+        mutation.mutate(data);
+        reset();
+        setTimeout(() => {
+            router.push('/projetos');
+        },2000)
     }
 
     return (
@@ -68,11 +83,11 @@ export default function novoProjeto(){
                     <label>Categoria do Projeto: </label>
                     <select {... register('categoria')}>
                         <option value="">Selecione uma categoria</option>
-                        <option value="Front-end">Front-end</option>
-                        <option value="Back-End">Back-end</option>
-                        <option value="Mobile">Mobile</option>
-                        <option value="Database">Database</option>
-                        <option value="Redes">Redes</option>
+                        <option value="Planejamento">Planejamento</option>
+                        <option value="Infra">Infra</option>
+                        <option value="Design">Design</option>
+                        <option value="Industrial">Industrial</option>
+                        <option value="EPI">EPI</option>
                         <option value="Hardware">Manutenção Hardware</option>
                         <option value="Other">Other</option>
                     </select>
@@ -80,6 +95,19 @@ export default function novoProjeto(){
                         <span className={styles.errorCategoria}>* {errors.categoria.message}</span>
                     )}
                 </div>
+
+                {mutation.isSuccess && (
+                    <div className={styles.contentSucess}>
+                        <span className={styles.sucessMessage}>Projeto Criado!</span>
+                        <GiConfirmed className={styles.iconSucess}/>
+                    </div>
+                )}
+                {mutation.isLoading && (
+                    <div className={styles.contentLoading}>
+                        <span className={styles.loadingMessage}>Carregando...</span>
+                        <AiOutlineLoading3Quarters className={styles.iconLoading}/>
+                    </div>
+                )}
 
                 <div>
                 <button className={styles.btn} id="btn" type='submit'>Criar Projeto</button>

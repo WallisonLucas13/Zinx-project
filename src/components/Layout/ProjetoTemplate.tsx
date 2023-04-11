@@ -1,20 +1,38 @@
 import { Projeto } from "@/types/Projeto";
 import styles from './ProjetoTemplate.module.css'
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { BsPencil, BsFillTrashFill } from 'react-icons/bs'
 
 type ProjetoProps = {
-    projeto: Projeto
+    projeto: Projeto,
+    handleDelete: (id: number) => Promise<void>
 }
 
-export default function ProjetoTemplate({projeto}: ProjetoProps){
+export default function ProjetoTemplate({projeto, handleDelete}: ProjetoProps){
+
+    const path = `/projeto/${projeto.id}`;
+    const deleteEmitter = () => {
+        handleDelete(projeto.id);
+    }
+
     return (
-        <div>
-            <div className={styles.column}>
-                <div className={styles.card}>
+            <div className={styles.card}>
                     <h1>{projeto.nome}</h1>
-                    <h2>Categoria: <span>{projeto.categoria}</span></h2>
-                    <h3>Orçamento Total: <span> R$ {projeto.tetoDeGastos},00</span></h3>
-                </div>
+                    <p>
+                        <span>Orçamento: <span> R${projeto.tetoDeGastos},00</span></span>
+                    </p>
+                    <p className={styles.category}>
+                        <span className={`${styles[projeto.categoria.toLowerCase()]}`}></span> {projeto.categoria}
+                    </p>
+
+                    <div className={styles.cardActions}>
+                        <Link href={path}><BsPencil/> Editar</Link>
+
+                        <button onClick={deleteEmitter}>
+                            <BsFillTrashFill/> Excluir
+                        </button>
+                    </div>
             </div>
-        </div>
     )
 }

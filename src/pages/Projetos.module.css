@@ -1,7 +1,10 @@
 .content{
-    text-align: center;
-    margin:0 -5px;
-    justify-content: center;
+}
+.contentProjetos{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
 }
 .header{
     display: flex;
@@ -59,4 +62,18 @@
 .icon:hover{
     color: lightblue;
     transform: scale(1.2);
+}
+
+.contentLoadingMessage{
+    margin-bottom: 1em;
+    font-weight: bold;
+    font-size: 16pt;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.contentLoadingMessage p{
+    width: 200px;
 }

@@ -76,3 +76,42 @@
 .errorGastos{
     color: red;
 }
+
+.contentSucess{
+    margin-bottom: 1em;
+    background-color: lightgreen;
+    padding:1em;
+    display: flex;
+    transition: 0.5s;
+}
+
+.contentSucess:hover{
+    transform: scale(1.05);
+}
+
+.sucessMessage{
+    font-weight: bold;
+}
+
+.iconSucess{
+    font-size: 19pt;
+    margin-left: 1em;
+    position: relative;
+}
+
+.contentLoading{
+    margin-bottom: 1em;
+    background-color: rgb(231, 231, 95);
+    padding:1em;
+    display: flex;
+}
+
+.loadingMessage{
+    font-weight: bold;
+}
+
+.iconLoading{
+    font-size: 19pt;
+    margin-left: 1em;
+    position: relative;
+}
