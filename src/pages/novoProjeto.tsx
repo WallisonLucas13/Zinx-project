@@ -3,14 +3,26 @@ import styles from './novoProjeto.module.css'
 import { useForm as UseForm } from 'react-hook-form'
 import * as Yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup'
+import { useQuery } from 'react-query';
+import ProjetosService from '@/services/ProjetosService';
 
 const schema = Yup.object().shape({
     nome: Yup.string().required("Campo Obrigatório"),
     categoria: Yup.string().min(3, 'Selecione uma opção').required("Selecione uma opção"),
-    tetoDeGastos: Yup.number().default(0).moreThan(0, 'Defina um teto de gastos sólido').required("Campo Obrigatório")
+    tetoDeGastos: Yup.number().min(0, 'Campo Obrigatório').default(0).moreThan(0, 'Você precisa gastar mais!').required("Campo Obrigatório")
 })
 
+const verificarError = (message: string | undefined) => {
+
+    if(message != undefined && message.length > 50){
+        return "Campo Obrigatório";
+    }
+    return message;
+}
+
 export default function novoProjeto(){
+
+    const projetosService = new ProjetosService();
 
     const { register, handleSubmit, formState, reset } = UseForm({
         mode: 'all',
@@ -18,34 +30,41 @@ export default function novoProjeto(){
         defaultValues: {
             nome: '',
             categoria: '',
-            tetoDeGastos: 0
+            tetoDeGastos: 1
         }
     });
 
     const { errors, isSubmitting } = formState;
 
-    console.log(errors);
-
-    const handleSubmitData = (data: any) => {
-        console.log('submit', data)
+    const handleSubmitData = (dataForm: any) => {
+        
     }
 
     return (
-        <div>
+        <div className={styles.contentAll}>
+
+            <h1>Criar Projeto</h1>
+            <p>Crie seu projeto para depois adicionar os serviços</p>
 
             <form className={styles.form} onSubmit={handleSubmit(handleSubmitData)}>
-
-            <h1>Crie seu novo Projeto</h1>
                 
-                <div>
+                <div className={styles.formControl}>
                     <label>Nome do Projeto: </label>
                     <input {... register('nome')} type="text" placeholder="insira o nome do projeto"></input>
                     {errors.nome && (
-                        <p className={styles.errorNome}>{errors.nome.message}</p>
+                        <span className={styles.errorNome}>* {errors.nome.message}</span>
                     )}
                 </div>
 
-                <div>
+                <div className={styles.formControl}>
+                    <label>Orçamento do Projeto: </label>
+                    <input {... register('tetoDeGastos')} type="number" placeholder="insira o orçamento total" min='0'></input>
+                    {errors.tetoDeGastos && (
+                        <span className={styles.errorGastos}>* {verificarError(errors.tetoDeGastos.message)}</span>
+                    )}
+                </div>
+
+                <div className={styles.formControl}>
                     <label>Categoria do Projeto: </label>
                     <select {... register('categoria')}>
                         <option value="">Selecione uma categoria</option>
@@ -58,15 +77,7 @@ export default function novoProjeto(){
                         <option value="Other">Other</option>
                     </select>
                     {errors.categoria && (
-                        <p className={styles.errorCategoria}>{errors.categoria.message}</p>
-                    )}
-                </div>
-
-                <div>
-                    <label>Teto de Gastos: </label>
-                    <input {... register('tetoDeGastos')} type="number" placeholder="insira o teto de gastos" value="0"></input>
-                    {errors.tetoDeGastos && (
-                        <p className={styles.errorGastos}>{errors.tetoDeGastos.message}</p>
+                        <span className={styles.errorCategoria}>* {errors.categoria.message}</span>
                     )}
                 </div>
 
