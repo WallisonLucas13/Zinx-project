@@ -12,6 +12,7 @@ type ProjetoProps = {
 export default function ProjetoTemplate({projeto, handleDelete}: ProjetoProps){
 
     const path = `/projeto/${projeto.id}`;
+
     const deleteEmitter = () => {
         handleDelete(projeto.id);
     }

@@ -7,6 +7,8 @@ import styles from './Projetos.module.css'
 import ProjetosService from "@/services/ProjetosService";
 import Link from "next/link";
 import { IoMdAddCircleOutline } from 'react-icons/io';
+import { GoAlert } from 'react-icons/go';
+import { useState } from "react";
 
 const projetosService = new ProjetosService();
 
@@ -18,8 +20,11 @@ export default function Projetos(){
 
     const {data, isLoading, refetch} = useQuery({
         queryKey: ['projetos'],
-        queryFn: getProjetos
+        queryFn: getProjetos,
+        enabled: true
     })
+
+    const [messageAlert, setMessageAlert] = useState("");
 
     function toEnd(){
         console.log("Descendo!")
@@ -33,13 +38,12 @@ export default function Projetos(){
     });
 
     const deleteProjeto = async (id: number) => {
-        mutation.mutate(id);
-        if(mutation.isSuccess){
-            console.log(mutation.status)
-            console.log((await refetch()).data);
+        await mutation.mutateAsync(id);
+
+        if(mutation.isIdle){
+            refetch();
         }
     }
-
 
     return (
         <div className={styles.content}>

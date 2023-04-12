@@ -1,14 +1,21 @@
-.content{
-}
 .contentProjetos{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: flex-start;
 }
 .header{
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: #222;
+    color: #38C292;
+    height: 60px;
+    width: 250px;
+    margin-bottom: 1.5em;
+    margin-top: 1em;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 .content:after{
     content: "";
@@ -19,8 +26,6 @@
 .title{
     padding: 1.5em;
     font-size: 17pt;
-    font-weight: bold;
-    font-family:Arial, Helvetica, sans-serif;
 }
 
 .btn{
@@ -55,7 +60,7 @@
 }
 
 .icon{
-    color: #17c4b5;
+    color: #38C292;
     font-size: 30pt;
     transition: 0.5s;
 }
@@ -72,8 +77,32 @@
     padding: 1em;
     display: flex;
     justify-content: center;
+    transition: 2s;
 }
 
 .contentLoadingMessage p{
     width: 200px;
+}
+
+.messageAlert{
+    z-index: 1100;
+    bottom: 50px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.messageAlert p{
+    font-size: 13pt;
+    border: 1px black solid;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 0 1em;
+}
+
+.messageAlert svg{
+    color: #b50703;
+    font-size: 17pt;
+    margin-right: 1em;
 }
